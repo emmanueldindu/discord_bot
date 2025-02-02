@@ -1,7 +1,13 @@
 const { Client } = require('discord.js-selfbot-v13');
 require('dotenv').config();
+const express = require('express');
 
+
+
+const app = express();
+const PORT = process.env.PORT || 5000
 const client = new Client();
+
 
 client.once('ready', async () => {
     console.log(`Logged in as ${client.user.username}`);
@@ -117,3 +123,11 @@ client.once('ready', async () => {
 });
 
 client.login(process.env.TOKEN);
+
+app.get('/', (req, res) => {
+    res.send('Bot is running!');
+});
+
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+});
